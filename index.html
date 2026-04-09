@@ -1,390 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Vision - Advanced AI Solutions</title>
+    <title>Car Sphere Parts - Modern Shop</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
         * {
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .space-grotesk {
-            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            background: #0a0a0a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
             overflow-x: hidden;
+            color: #ffffff;
         }
         
-        .hero-bg {
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.2) 0%, transparent 50%),
-                linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
-            animation: hero-glow 20s ease-in-out infinite;
-        }
-        
-        .rotating-logo {
-            animation: rotate3d 10s linear infinite;
-            transform-style: preserve-3d;
-            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 50%, #d0d0d0 100%);
-            box-shadow: 
-                0 0 20px rgba(255, 255, 255, 0.3),
-                0 0 40px rgba(200, 200, 200, 0.2),
-                inset 0 0 20px rgba(255, 255, 255, 0.1);
-        }
-        
-        .moon-text {
-            background: linear-gradient(135deg, #f0f0f0 0%, #ffffff 50%, #e0e0e0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        
-        .working-brain {
-            animation: brain-working 4s ease-in-out infinite;
-            position: relative;
-        }
-        
-        @keyframes brain-working {
-            0%, 100% { 
-                transform: scale(1) rotate(0deg); 
-                filter: brightness(1) hue-rotate(0deg);
-            }
-            25% { 
-                transform: scale(1.1) rotate(5deg); 
-                filter: brightness(1.2) hue-rotate(90deg);
-            }
-            50% { 
-                transform: scale(1.05) rotate(-3deg); 
-                filter: brightness(1.3) hue-rotate(180deg);
-            }
-            75% { 
-                transform: scale(1.08) rotate(2deg); 
-                filter: brightness(1.1) hue-rotate(270deg);
-            }
-        }
-        
-        .brain-question {
-            position: absolute;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(147, 51, 234, 0.9));
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            animation: question-float 8s ease-in-out infinite;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        @keyframes question-float {
-            0%, 100% { 
-                opacity: 0;
-                transform: translate(0, 0) scale(0.8);
-            }
-            10%, 90% { 
-                opacity: 1;
-                transform: translate(var(--x), var(--y)) scale(1);
-            }
-        }
-        
-        .question-1 {
-            --x: -150px;
-            --y: -80px;
-            animation-delay: 0s;
-        }
-        
-        .question-2 {
-            --x: 120px;
-            --y: -100px;
-            animation-delay: 2s;
-        }
-        
-        .question-3 {
-            --x: -180px;
-            --y: 60px;
-            animation-delay: 4s;
-        }
-        
-        .question-4 {
-            --x: 140px;
-            --y: 80px;
-            animation-delay: 6s;
-        }
-        
-        @keyframes rotate3d {
-            0% { transform: rotateY(0deg) rotateX(0deg); }
-            25% { transform: rotateY(90deg) rotateX(10deg); }
-            50% { transform: rotateY(180deg) rotateX(0deg); }
-            75% { transform: rotateY(270deg) rotateX(-10deg); }
-            100% { transform: rotateY(360deg) rotateX(0deg); }
-        }
-        
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        
-        .floating-element {
-            position: absolute;
-            background: linear-gradient(45deg, #3b82f6, #9333ea, #ec4899);
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: float-around 20s infinite linear;
-        }
-        
-        @keyframes float-around {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(100px, -50px) rotate(90deg); }
-            50% { transform: translate(-50px, -100px) rotate(180deg); }
-            75% { transform: translate(-100px, 50px) rotate(270deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
-        }
-        
-        .pulse-button {
-            animation: pulse-button 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse-button {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(147, 51, 234, 0.8); }
-        }
-        
-        .neon-border {
-            box-shadow: 
-                0 0 10px rgba(59, 130, 246, 0.8),
-                0 0 20px rgba(147, 51, 234, 0.6),
-                0 0 30px rgba(236, 72, 153, 0.4),
-                inset 0 0 10px rgba(255, 255, 255, 0.1);
-        }
-        
-        .holographic-text {
-            background: linear-gradient(45deg, #3b82f6, #9333ea, #ec4899, #3b82f6);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: holographic-shift 3s ease-in-out infinite;
-        }
-        
-        @keyframes holographic-shift {
-            0%, 100% { background-position: 0% 50%; }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
-        @keyframes hero-glow {
-            0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.5; }
-            50% { transform: rotate(180deg) scale(1.1); opacity: 0.8; }
-        }
-        
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
+        .glass-card {
+            background: rgba(15, 15, 35, 0.6);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
         
-        .glass-dark {
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        .glass-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            background: rgba(15, 15, 35, 0.8);
+            border-color: rgba(255, 255, 255, 0.2);
         }
         
-        .gradient-text {
-            background: linear-gradient(135deg, #3b82f6 0%, #9333ea 50%, #ec4899 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #3b82f6 0%, #9333ea 100%);
-        }
-        
-        .floating {
-            animation: floating 4s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(1deg); }
-            50% { transform: translateY(-20px) rotate(0deg); }
-            75% { transform: translateY(-10px) rotate(-1deg); }
-        }
-        
-        .pulse-glow {
-            animation: pulse-glow 3s ease-in-out infinite;
-        }
-        
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(147, 51, 234, 0.3); }
-            50% { box-shadow: 0 0 50px rgba(59, 130, 246, 0.8), 0 0 100px rgba(147, 51, 234, 0.4); }
-        }
-        
-        .slide-in {
-            animation: slideIn 1s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .feature-card {
+        .glass-button {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
         }
         
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .feature-card:hover::before {
-            left: 100%;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(59, 130, 246, 0.4);
-        }
-        
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(135deg, #3b82f6 0%, #9333ea 100%);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .scroll-smooth {
-            scroll-behavior: smooth;
-        }
-        
-        .typing-effect {
-            border-right: 3px solid #3b82f6;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { border-color: #3b82f6; }
-            51%, 100% { border-color: transparent; }
-        }
-        
-        .particle {
-            position: absolute;
-            pointer-events: none;
-            opacity: 0.6;
-            animation: particle-float 15s infinite linear;
-        }
-        
-        @keyframes particle-float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-        }
-        
-        .brain-section {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .brain-animation {
-            animation: brain-pulse 4s ease-in-out infinite;
-        }
-        
-        @keyframes brain-pulse {
-            0%, 100% { transform: scale(1); filter: brightness(1); }
-            50% { transform: scale(1.05); filter: brightness(1.2); }
-        }
-        
-        .team-card {
-            transition: all 0.3s ease;
-        }
-        
-        .team-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
-        }
-        
-        .chat-message {
-            animation: messageSlide 0.3s ease-out;
-        }
-        
-        @keyframes messageSlide {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .cyber-button {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .cyber-button::before {
+        .glass-button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -392,1403 +73,569 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+            transition: left 0.5s ease;
         }
         
-        .cyber-button:hover::before {
+        .glass-button:hover::before {
             left: 100%;
         }
         
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            animation: whatsapp-float 3s ease-in-out infinite;
+        .glass-button:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
-        @keyframes whatsapp-float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .car-card {
+            background: linear-gradient(135deg, rgba(15, 15, 35, 0.7) 0%, rgba(26, 26, 46, 0.5) 100%);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
         
-        .review-box {
-            transition: all 0.3s ease;
+        .car-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
         }
         
-        .review-box:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2);
+        .car-card:hover::before {
+            left: 100%;
         }
         
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem !important;
-            }
-            
-            .section-title {
-                font-size: 2rem !important;
-            }
-            
-            .floating-element {
-                display: none;
-            }
-            
-            .particle {
-                display: none;
-            }
-            
-            .brain-question {
-                display: none;
-            }
+        .car-card:hover {
+            transform: translateY(-16px) scale(1.08);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.5),
+                0 0 0 2px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.25);
         }
         
-        @media (max-width: 640px) {
-            .hero-title {
-                font-size: 2rem !important;
-                line-height: 1.2 !important;
+        .part-item {
+            background: linear-gradient(135deg, rgba(15, 15, 35, 0.6) 0%, rgba(26, 26, 46, 0.4) 100%);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .part-item.selected {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(34, 197, 94, 0.1) 100%);
+            border-color: rgba(34, 197, 94, 0.6);
+            box-shadow: 
+                0 0 30px rgba(34, 197, 94, 0.4),
+                0 0 0 2px rgba(34, 197, 94, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(15, 15, 35, 0.7) 0%, rgba(26, 26, 46, 0.5) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateX(100%);
             }
-            
-            .section-title {
-                font-size: 1.8rem !important;
-            }
-            
-            .text-xl {
-                font-size: 1.1rem !important;
-            }
-            
-            .grid-cols-3 {
-                grid-template-columns: 1fr !important;
-                gap: 1rem !important;
-            }
-            
-            .md\\:grid-cols-2 {
-                grid-template-columns: 1fr !important;
-            }
-            
-            .lg\\:grid-cols-3 {
-                grid-template-columns: 1fr !important;
-            }
-            
-            .feature-card {
-                padding: 1.5rem !important;
-            }
-            
-            .team-card {
-                padding: 1rem !important;
-            }
-            
-            .w-64 {
-                width: 12rem !important;
-                height: 12rem !important;
-            }
-            
-            .w-20 {
-                width: 4rem !important;
-                height: 4rem !important;
-            }
-            
-            .text-8xl {
-                font-size: 3rem !important;
-            }
-            
-            .text-3xl {
-                font-size: 1.5rem !important;
-            }
-            
-            .text-2xl {
-                font-size: 1.3rem !important;
-            }
-            
-            .px-8 {
-                padding-left: 1.5rem !important;
-                padding-right: 1.5rem !important;
-            }
-            
-            .py-4 {
-                padding-top: 1rem !important;
-                padding-bottom: 1rem !important;
-            }
-            
-            .max-w-5xl {
-                max-width: 100% !important;
-            }
-            
-            .max-w-4xl {
-                max-width: 100% !important;
-            }
-            
-            .max-w-3xl {
-                max-width: 100% !important;
-            }
-            
-            .max-w-2xl {
-                max-width: 100% !important;
-            }
-            
-            .max-w-md {
-                max-width: 85% !important;
-            }
-            
-            .container {
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
+            to { 
+                opacity: 1;
+                transform: translateX(0);
             }
         }
         
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 1.8rem !important;
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
             }
-            
-            .section-title {
-                font-size: 1.5rem !important;
-            }
-            
-            .text-xl {
-                font-size: 1rem !important;
-            }
-            
-            .text-lg {
-                font-size: 0.95rem !important;
-            }
-            
-            .px-6 {
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
-            }
-            
-            .px-4 {
-                padding-left: 0.75rem !important;
-                padding-right: 0.75rem !important;
-            }
-            
-            .py-20 {
-                padding-top: 3rem !important;
-                padding-bottom: 3rem !important;
-            }
-            
-            .py-12 {
-                padding-top: 2rem !important;
-                padding-bottom: 2rem !important;
-            }
-            
-            .py-8 {
-                padding-top: 1.5rem !important;
-                padding-bottom: 1.5rem !important;
-            }
-            
-            .py-4 {
-                padding-top: 0.75rem !important;
-                padding-bottom: 0.75rem !important;
-            }
-            
-            .py-3 {
-                padding-top: 0.5rem !important;
-                padding-bottom: 0.5rem !important;
-            }
-            
-            .py-2 {
-                padding-top: 0.25rem !important;
-                padding-bottom: 0.25rem !important;
-            }
-            
-            .gap-8 {
-                gap: 1rem !important;
-            }
-            
-            .gap-6 {
-                gap: 0.75rem !important;
-            }
-            
-            .gap-4 {
-                gap: 0.5rem !important;
-            }
-            
-            .gap-3 {
-                gap: 0.375rem !important;
-            }
-            
-            .gap-2 {
-                gap: 0.25rem !important;
-            }
-            
-            .space-x-8 {
-                margin-left: 1rem !important;
-                margin-right: 1rem !important;
-            }
-            
-            .space-x-4 {
-                margin-left: 0.5rem !important;
-                margin-right: 0.5rem !important;
-            }
-            
-            .space-x-3 {
-                margin-left: 0.375rem !important;
-                margin-right: 0.375rem !important;
-            }
-            
-            .space-x-2 {
-                margin-left: 0.25rem !important;
-                margin-right: 0.25rem !important;
-            }
-            
-            .mb-8 {
-                margin-bottom: 1rem !important;
-            }
-            
-            .mb-6 {
-                margin-bottom: 0.75rem !important;
-            }
-            
-            .mb-4 {
-                margin-bottom: 0.5rem !important;
-            }
-            
-            .mb-2 {
-                margin-bottom: 0.25rem !important;
-            }
-            
-            .h-96 {
-                height: 20rem !important;
-            }
-            
-            .w-16 {
-                width: 3rem !important;
-                height: 3rem !important;
-            }
-            
-            .w-12 {
-                width: 2.5rem !important;
-                height: 2.5rem !important;
-            }
-            
-            .w-10 {
-                width: 2rem !important;
-                height: 2rem !important;
-            }
-            
-            .text-4xl {
-                font-size: 1.8rem !important;
-            }
-            
-            .text-5xl {
-                font-size: 2rem !important;
-            }
-            
-            .text-6xl {
-                font-size: 2.5rem !important;
-            }
-            
-            .text-7xl {
-                font-size: 2.8rem !important;
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
             }
         }
         
-        /* Tablet Specific */
-        @media (min-width: 641px) and (max-width: 1024px) {
-            .hero-title {
-                font-size: 3rem !important;
-            }
-            
-            .section-title {
-                font-size: 2.5rem !important;
-            }
-            
-            .container {
-                padding-left: 2rem !important;
-                padding-right: 2rem !important;
-            }
-            
-            .grid-cols-3 {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-            
-            .lg\\:grid-cols-3 {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
+        .shimmer {
+            position: relative;
+            overflow: hidden;
         }
         
-        /* Laptop Specific */
-        @media (min-width: 1025px) and (max-width: 1440px) {
-            .container {
-                max-width: 1200px !important;
-            }
+        .shimmer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.15),
+                transparent
+            );
+            animation: shimmer 4s infinite;
         }
         
-        /* Desktop Specific */
-        @media (min-width: 1441px) {
-            .container {
-                max-width: 1400px !important;
-            }
-        }
-        
-        /* iPhone Specific Fixes */
-        @supports (-webkit-touch-callout: none) {
-            /* iPhone Safari Specific */
-            html, body {
-                -webkit-text-size-adjust: 100%;
-                -webkit-tap-highlight-color: transparent;
-                touch-action: manipulation;
-            }
-            
-            .glass {
-                -webkit-backdrop-filter: blur(15px);
-                backdrop-filter: blur(15px);
-                background: rgba(255, 255, 255, 0.1);
-            }
-            
-            .glass-dark {
-                -webkit-backdrop-filter: blur(20px);
-                backdrop-filter: blur(20px);
-                background: rgba(0, 0, 0, 0.7);
-            }
-            
-            .gradient-bg {
-                background: -webkit-linear-gradient(135deg, #3b82f6 0%, #9333ea 100%);
-                background: linear-gradient(135deg, #3b82f6 0%, #9333ea 100%);
-            }
-            
-            .gradient-text {
-                background: -webkit-linear-gradient(135deg, #3b82f6 0%, #9333ea 50%, #ec4899 100%);
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-                color: transparent;
-            }
-            
-            .holographic-text {
-                background: -webkit-linear-gradient(45deg, #3b82f6, #9333ea, #ec4899, #3b82f6);
-                background-size: 300% 300%;
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                background-clip: text;
-                color: transparent;
-            }
-            
-            .rotating-logo {
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-            }
-            
-            .cyber-button {
-                -webkit-tap-highlight-color: transparent;
-                -webkit-touch-callout: none;
-                -webkit-user-select: none;
-                user-select: none;
-            }
-            
-            .feature-card, .team-card {
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-            }
-            
-            .neon-border {
-                -webkit-box-shadow: 
-                    0 0 10px rgba(59, 130, 246, 0.8),
-                    0 0 20px rgba(147, 51, 234, 0.6),
-                    0 0 30px rgba(236, 72, 153, 0.4),
-                    inset 0 0 10px rgba(255, 255, 255, 0.1);
-                box-shadow: 
-                    0 0 10px rgba(59, 130, 246, 0.8),
-                    0 0 20px rgba(147, 51, 234, 0.6),
-                    0 0 30px rgba(236, 72, 153, 0.4),
-                    inset 0 0 10px rgba(255, 255, 255, 0.1);
-            }
-            
-            /* iPhone Navigation Fix */
-            #navbar {
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-                -webkit-backface-visibility: hidden;
-                backface-visibility: hidden;
-            }
-            
-            /* iPhone Chat Box Fix */
-            #chatBox {
-                -webkit-overflow-scrolling: touch;
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
-            
-            /* iPhone Button Fix */
-            button, a {
-                -webkit-tap-highlight-color: transparent;
-                -webkit-touch-callout: none;
-            }
-            
-            /* iPhone Input Fix */
-            input, textarea {
-                -webkit-appearance: none;
-                appearance: none;
-                -webkit-border-radius: 0;
-                border-radius: 0;
-            }
-        }
-        
-        /* iPhone Specific Media Queries */
-        @media only screen 
-            and (device-width: 375px) 
-            and (device-height: 667px) 
-            and (-webkit-device-pixel-ratio: 2) {
-            
-            .hero-title {
-                font-size: 1.8rem !important;
-                line-height: 1.1 !important;
-            }
-            
-            .section-title {
-                font-size: 1.6rem !important;
-            }
-            
-            .container {
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
-            }
-            
-            .w-64 {
-                width: 10rem !important;
-                height: 10rem !important;
-            }
-            
-            .text-8xl {
-                font-size: 2.5rem !important;
-            }
-        }
-        
-        @media only screen 
-            and (device-width: 375px) 
-            and (device-height: 812px) 
-            and (-webkit-device-pixel-ratio: 3) {
-            
-            .hero-title {
-                font-size: 2rem !important;
-            }
-            
-            .section-title {
-                font-size: 1.8rem !important;
-            }
-            
-            .py-20 {
-                padding-top: 2.5rem !important;
-                padding-bottom: 2.5rem !important;
-            }
-        }
-        
-        @media only screen 
-            and (device-width: 414px) 
-            and (device-height: 896px) 
-            and (-webkit-device-pixel-ratio: 2) {
-            
-            .hero-title {
-                font-size: 2.2rem !important;
-            }
-            
-            .section-title {
-                font-size: 2rem !important;
-            }
-        }
-        
-        @media only screen 
-            and (device-width: 414px) 
-            and (device-height: 896px) 
-            and (-webkit-device-pixel-ratio: 3) {
-            
-            .hero-title {
-                font-size: 2.3rem !important;
-            }
-            
-            .section-title {
-                font-size: 2.1rem !important;
-            }
-        }
-        
-        /* iPhone SE and older models */
-        @media only screen 
-            and (device-width: 320px) 
-            and (device-height: 568px) 
-            and (-webkit-device-pixel-ratio: 2) {
-            
-            .hero-title {
-                font-size: 1.5rem !important;
-            }
-            
-            .section-title {
-                font-size: 1.3rem !important;
-            }
-            
-            .text-xl {
-                font-size: 0.9rem !important;
-            }
-            
-            .w-64 {
-                width: 8rem !important;
-                height: 8rem !important;
-            }
-            
-            .text-8xl {
-                font-size: 2rem !important;
-            }
-        }
-        
-        /* iPhone 12 Mini */
-        @media only screen 
-            and (device-width: 375px) 
-            and (device-height: 812px) 
-            and (-webkit-device-pixel-ratio: 3) {
-            
-            .container {
-                padding-left: 0.75rem !important;
-                padding-right: 0.75rem !important;
-            }
-        }
-        
-        /* iPhone 12 Pro Max */
-        @media only screen 
-            and (device-width: 428px) 
-            and (device-height: 926px) 
-            and (-webkit-device-pixel-ratio: 3) {
-            
-            .hero-title {
-                font-size: 2.4rem !important;
-            }
-            
-            .section-title {
-                font-size: 2.2rem !important;
-            }
-        }
-        
-        /* General iPhone Landscape */
-        @media only screen 
-            and (max-device-width: 896px) 
-            and (orientation: landscape) {
-            
-            .hero-title {
-                font-size: 1.6rem !important;
-            }
-            
-            .section-title {
-                font-size: 1.4rem !important;
-            }
-            
-            .py-20 {
-                padding-top: 1.5rem !important;
-                padding-bottom: 1.5rem !important;
-            }
-            
-            .grid-cols-3 {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-        }
-        
-        /* Safari iOS Specific */
-        @supports (-webkit-appearance: none) {
-            .glass, .glass-dark {
-                -webkit-backdrop-filter: blur(10px);
-                backdrop-filter: blur(10px);
-            }
-            
-            .floating {
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-            }
-            
-            .pulse-glow {
-                -webkit-animation: pulse-glow 3s ease-in-out infinite;
-                animation: pulse-glow 3s ease-in-out infinite;
-            }
-        }
-        
-        /* iOS 15+ Specific */
-        @supports (font: -apple-system-body) {
-            .space-grotesk {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            }
-            
-            .hero-bg {
-                background-attachment: scroll;
-            }
-        }
-        
-        /* Android Specific */
-        @media screen and (-webkit-min-device-pixel-ratio: 0) {
-            .glass {
-                -webkit-backdrop-filter: blur(15px);
-                backdrop-filter: blur(15px);
-            }
-        }
-        
-        /* High DPI Displays */
-        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            .rotating-logo {
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-            }
-            
-            .neon-border {
-                -webkit-box-shadow: 
-                    0 0 10px rgba(59, 130, 246, 0.8),
-                    0 0 20px rgba(147, 51, 234, 0.6),
-                    0 0 30px rgba(236, 72, 153, 0.4),
-                    inset 0 0 10px rgba(255, 255, 255, 0.1);
-                box-shadow: 
-                    0 0 10px rgba(59, 130, 246, 0.8),
-                    0 0 20px rgba(147, 51, 234, 0.6),
-                    0 0 30px rgba(236, 72, 153, 0.4),
-                    inset 0 0 10px rgba(255, 255, 255, 0.1);
-            }
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
     </style>
 </head>
-<body class="scroll-smooth">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-dark transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center rotating-logo">
-                        <span class="text-white font-bold text-xl moon-text">MOON</span>
-                    </div>
-                    <span class="text-2xl font-bold text-white space-grotesk holographic-text">UI AI</span>
-                </div>
-                
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link text-white hover:text-blue-400">Home</a>
-                    <a href="#features" class="nav-link text-white hover:text-blue-400">Features</a>
-                    <a href="#team" class="nav-link text-white hover:text-blue-400">Team</a>
-                    <a href="#contact" class="nav-link text-white hover:text-blue-400">Contact</a>
-                </div>
-                
-                <button class="md:hidden text-white" id="mobile-menu-btn">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div class="hidden md:hidden glass-dark" id="mobile-menu">
-            <div class="px-6 py-4 space-y-4">
-                <a href="#home" class="block text-white hover:text-blue-400">Home</a>
-                <a href="#features" class="block text-white hover:text-blue-400">Features</a>
-                <a href="#team" class="block text-white hover:text-blue-400">Team</a>
-                <a href="#contact" class="block text-white hover:text-blue-400">Contact</a>
-            </div>
-        </div>
-    </nav>
+<body>
+    <div id="root"></div>
 
-    <!-- Hero Section -->
-    <style>
-        #home {
-            padding-top: 80px;
-            min-height: calc(100vh - 80px);
-        }
-        
-        @media (max-width: 768px) {
-            #home {
-                padding-top: 70px;
-                min-height: calc(100vh - 70px);
-            }
-        }
-        
-        @media (max-width: 640px) {
-            #home {
-                padding-top: 60px;
-                min-height: calc(100vh - 60px);
-            }
-        }
-    </style>
-    <section id="home" class="hero-bg min-h-screen flex items-center relative">
-        <!-- Floating Elements -->
-        <div class="floating-elements">
-            <div class="floating-element" style="width: 60px; height: 60px; top: 10%; left: 10%; animation-delay: 0s;"></div>
-            <div class="floating-element" style="width: 40px; height: 40px; top: 20%; left: 80%; animation-delay: 2s;"></div>
-            <div class="floating-element" style="width: 80px; height: 80px; top: 70%; left: 20%; animation-delay: 4s;"></div>
-            <div class="floating-element" style="width: 50px; height: 50px; top: 60%; left: 70%; animation-delay: 6s;"></div>
-            <div class="floating-element" style="width: 30px; height: 30px; top: 30%; left: 50%; animation-delay: 8s;"></div>
-        </div>
-        
-        <!-- Animated Particles -->
-        <div class="particle" style="left: 10%; animation-delay: 0s;">
-            <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
-        </div>
-        <div class="particle" style="left: 20%; animation-delay: 2s;">
-            <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
-        </div>
-        <div class="particle" style="left: 30%; animation-delay: 4s;">
-            <div class="w-2 h-2 bg-pink-400 rounded-full"></div>
-        </div>
-        <div class="particle" style="left: 40%; animation-delay: 6s;">
-            <div class="w-4 h-4 bg-blue-300 rounded-full"></div>
-        </div>
-        <div class="particle" style="left: 50%; animation-delay: 8s;">
-            <div class="w-2 h-2 bg-purple-300 rounded-full"></div>
-        </div>
-        <div class="particle" style="left: 60%; animation-delay: 10s;">
-            <div class="w-3 h-3 bg-pink-300 rounded-full"></div>
-        </div>
-        <div class="particle" style="left: 70%; animation-delay: 12s;">
-            <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
-        </div>
-        <div class="particle" style="left: 80%; animation-delay: 14s;">
-            <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
-        </div>
-        <div class="particle" style="left: 90%; animation-delay: 16s;">
-            <div class="w-2 h-2 bg-pink-400 rounded-full"></div>
-        </div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center">
-                <h1 class="hero-title text-5xl md:text-7xl font-bold text-white mb-6 leading-tight space-grotesk">
-                    Welcome to <span class="gradient-text holographic-text">Future of AI</span>
-                </h1>
-                <p class="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
-                    Experience the power of next-generation artificial intelligence with our cutting-edge 2025 solutions. 
-                    Transform your business with advanced AI technology that learns, adapts, and evolves in real-time.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 mb-12 justify-center">
-                    <button onclick="scrollToSection('chat')" class="px-8 py-4 gradient-bg text-white rounded-full font-semibold hover:opacity-90 transition-all pulse-button text-lg cyber-button neon-border">
-                        <i class="fas fa-comments mr-2"></i> Try AI Chat
-                    </button>
-                    <button onclick="scrollToSection('features')" class="px-8 py-4 glass text-white rounded-full font-semibold hover:bg-white hover:bg-opacity-20 transition-all text-lg cyber-button neon-border">
-                        <i class="fas fa-rocket mr-2"></i> Explore Features
-                    </button>
-                </div>
-                
-                <!-- Trust Indicators -->
-                <div class="grid grid-cols-3 gap-6 mb-8 max-w-2xl mx-auto">
-                    <div class="glass rounded-lg p-4 text-center neon-border">
-                        <div class="text-3xl font-bold text-white mb-1">10K+</div>
-                        <div class="text-gray-400 text-sm">Active Users</div>
-                    </div>
-                    <div class="glass rounded-lg p-4 text-center neon-border">
-                        <div class="text-3xl font-bold text-white mb-1">99.9%</div>
-                        <div class="text-gray-400 text-sm">Accuracy</div>
-                    </div>
-                    <div class="glass rounded-lg p-4 text-center neon-border">
-                        <div class="text-3xl font-bold text-white mb-1">24/7</div>
-                        <div class="text-gray-400 text-sm">Support</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-    <!-- AI Chat Section -->
-    <section id="chat" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="section-title text-4xl font-bold text-white mb-4 space-grotesk">
-                    Ask Our <span class="gradient-text">AI Assistant</span>
-                </h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                    Get instant answers to your questions. Our AI is here to help you 24/7.
-                </p>
-            </div>
-            
-            <div class="max-w-5xl mx-auto">
-                <div class="glass rounded-3xl p-8 border border-blue-500/20">
-                    <!-- Chat Header -->
-                    <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-700">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                            <span class="text-white font-medium">AI Assistant Online</span>
-                        </div>
-                        <div class="text-sm text-gray-400">
-                            <span id="typingIndicator" class="hidden">AI is typing...</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Chat Messages Area -->
-                    <div class="bg-gray-800 rounded-xl p-6 mb-4 h-96 overflow-y-auto" id="chatBox">
-                        <div class="text-gray-400 text-center">
-                            <div class="mb-4">
-                                <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-robot text-white text-3xl"></i>
-                                </div>
-                                <p class="text-lg">👋 Hello! I'm your advanced AI assistant.</p>
-                                <p class="text-sm text-gray-300">I can help you with:</p>
-                                <div class="grid grid-cols-2 gap-2 mt-4 text-sm">
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-check text-green-400"></i>
-                                        <span>AI Automation</span>
-                                    </div>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-check text-green-400"></i>
-                                        <span>Machine Learning</span>
-                                    </div>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-check text-green-400"></i>
-                                        <span>Predictive Analytics</span>
-                                    </div>
-                                    <div class="flex items-center space-x-2">
-                                        <i class="fas fa-check text-green-400"></i>
-                                        <span>24/7 Support</span>
-                                    </div>
-                                </div>
-                                <p class="mt-4 text-sm text-blue-400">Type your question below and press Enter to send!</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Chat Input Area -->
-                    <div class="space-y-4">
-                        <div class="flex gap-3">
-                            <input type="text" id="userInput" placeholder="Ask me anything about AI, technology, or our services..." 
-                                   class="flex-1 px-4 py-4 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg">
-                            <button onclick="sendMessage()" class="px-6 py-4 gradient-bg text-white rounded-lg font-semibold hover:opacity-90 transition-all cyber-button">
-                                <i class="fas fa-paper-plane mr-2"></i> Send
-                            </button>
-                        </div>
-                        
-                        <!-- Quick Actions -->
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
-                            <button onclick="quickQuestion('automation')" class="px-3 py-2 bg-gray-700 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors">
-                                <i class="fas fa-robot mr-1"></i> Automation
-                            </button>
-                            <button onclick="quickQuestion('learning')" class="px-3 py-2 bg-gray-700 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors">
-                                <i class="fas fa-brain mr-1"></i> Learning
-                            </button>
-                            <button onclick="quickQuestion('security')" class="px-3 py-2 bg-gray-700 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors">
-                                <i class="fas fa-shield-alt mr-1"></i> Security
-                            </button>
-                            <button onclick="quickQuestion('pricing')" class="px-3 py-2 bg-gray-700 text-white text-sm rounded-lg hover:bg-gray-600 transition-colors">
-                                <i class="fas fa-dollar-sign mr-1"></i> Pricing
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        function App() {
+            const [selectedCar, setSelectedCar] = useState('');
+            const [selectedParts, setSelectedParts] = useState([]);
+            const [showDashboard, setShowDashboard] = useState(false);
+            const [searchTerm, setSearchTerm] = useState('');
+            const [mounted, setMounted] = useState(false);
+            const [hoveredCar, setHoveredCar] = useState('');
+            const [hoveredPart, setHoveredPart] = useState('');
+            const [animatingParts, setAnimatingParts] = useState(new Set());
 
-    <!-- Powerful Features Section -->
-    <section id="features" class="py-20 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="section-title text-4xl font-bold text-white mb-4 space-grotesk">
-                    Powerful <span class="gradient-text">AI Features</span>
-                </h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                    Experience the next generation of artificial intelligence capabilities
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="feature-card glass rounded-2xl p-8 text-center group">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-robot text-white text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Autonomous AI</h3>
-                    <div class="text-3xl font-bold text-blue-400 mb-2">1000%</div>
-                    <p class="text-gray-400">
-                        Self-learning AI systems that operate independently without human intervention, making decisions and executing tasks 24/7.
-                    </p>
-                    <div class="mt-4 flex justify-center space-x-2">
-                        <span class="px-3 py-1 bg-blue-500 text-white text-xs rounded-full">Real-time</span>
-                        <span class="px-3 py-1 bg-purple-500 text-white text-xs rounded-full">Adaptive</span>
-                    </div>
-                </div>
-                
-                <div class="feature-card glass rounded-2xl p-8 text-center group">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-brain text-white text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Quantum Processing</h3>
-                    <div class="text-3xl font-bold text-purple-400 mb-2">100x</div>
-                    <p class="text-gray-400">
-                        Quantum computing power that processes complex calculations in seconds, impossible for traditional computers to solve.
-                    </p>
-                    <div class="mt-4 flex justify-center space-x-2">
-                        <span class="px-3 py-1 bg-purple-500 text-white text-xs rounded-full">Quantum</span>
-                        <span class="px-3 py-1 bg-pink-500 text-white text-xs rounded-full">Revolutionary</span>
-                    </div>
-                </div>
-                
-                <div class="feature-card glass rounded-2xl p-8 text-center group">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-comments text-white text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Neural Language</h3>
-                    <div class="text-3xl font-bold text-green-400 mb-2">∞</div>
-                    <p class="text-gray-400">
-                        Advanced natural language processing that understands context, emotion, and intent in 100+ languages perfectly.
-                    </p>
-                    <div class="mt-4 flex justify-center space-x-2">
-                        <span class="px-3 py-1 bg-green-500 text-white text-xs rounded-full">Infinite</span>
-                        <span class="px-3 py-1 bg-blue-500 text-white text-xs rounded-full">Languages</span>
-                    </div>
-                </div>
-                
-                <div class="feature-card glass rounded-2xl p-8 text-center group">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-eye text-white text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Predictive Vision</h3>
-                    <div class="text-3xl font-bold text-yellow-400 mb-2">99.99%</div>
-                    <p class="text-gray-400">
-                        Computer vision that predicts future events, recognizes objects in real-time, and analyzes patterns invisible to humans.
-                    </p>
-                    <div class="mt-4 flex justify-center space-x-2">
-                        <span class="px-3 py-1 bg-yellow-500 text-white text-xs rounded-full">Future</span>
-                        <span class="px-3 py-1 bg-orange-500 text-white text-xs rounded-full">Sight</span>
-                    </div>
-                </div>
-                
-                <div class="feature-card glass rounded-2xl p-8 text-center group">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-shield-alt text-white text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Quantum Security</h3>
-                    <div class="text-3xl font-bold text-red-400 mb-2">Military</div>
-                    <p class="text-gray-400">
-                        Unbreakable quantum encryption that protects data using the laws of physics, making hacking mathematically impossible.
-                    </p>
-                    <div class="mt-4 flex justify-center space-x-2">
-                        <span class="px-3 py-1 bg-red-500 text-white text-xs rounded-full">Unbreakable</span>
-                        <span class="px-3 py-1 bg-pink-500 text-white text-xs rounded-full">Secure</span>
-                    </div>
-                </div>
-                
-                <div class="feature-card glass rounded-2xl p-8 text-center group">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-rocket text-white text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Instant Evolution</h3>
-                    <div class="text-3xl font-bold text-indigo-400 mb-2">0.001s</div>
-                    <p class="text-gray-400">
-                        AI that evolves and improves itself in milliseconds, adapting to new challenges and environments instantly.
-                    </p>
-                    <div class="mt-4 flex justify-center space-x-2">
-                        <span class="px-3 py-1 bg-indigo-500 text-white text-xs rounded-full">Lightning</span>
-                        <span class="px-3 py-1 bg-blue-500 text-white text-xs rounded-full">Fast</span>
-                    </div>
-                </div>
-                
-                <div class="feature-card glass rounded-2xl p-8 text-center lg:col-span-2 group">
-                    <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-infinity text-white text-3xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-4">Infinite Learning</h3>
-                    <div class="text-3xl font-bold text-cyan-400 mb-2">∞</div>
-                    <p class="text-gray-400">
-                        Continuously learning AI that never stops improving, accumulating knowledge and skills exponentially over time.
-                    </p>
-                    <div class="mt-4 flex justify-center space-x-2">
-                        <span class="px-3 py-1 bg-cyan-500 text-white text-xs rounded-full">Infinite</span>
-                        <span class="px-3 py-1 bg-purple-500 text-white text-xs rounded-full">Growth</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            useEffect(() => {
+                setMounted(true);
+            }, []);
 
-    <!-- Brain Section (Moon UI Style Team Work) -->
-    <section id="team" class="brain-section py-20">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="section-title text-4xl font-bold text-white mb-4 space-grotesk">
-                    Our <span class="gradient-text">AI Brain</span>
-                </h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-                    Meet the neural network that powers our intelligent solutions
-                </p>
-            </div>
-            
-            <div class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="text-center">
-                        <div class="relative inline-block mb-8">
-                            <div class="w-64 h-64 mx-auto gradient-bg rounded-full flex items-center justify-center working-brain">
-                                <i class="fas fa-brain text-white text-8xl"></i>
-                                
-                                <!-- Floating Questions Around Brain -->
-                                <div class="brain-question question-1">
-                                    <i class="fas fa-question-circle mr-1"></i> What is AI?
-                                </div>
-                                <div class="brain-question question-2">
-                                    <i class="fas fa-question-circle mr-1"></i> How does it work?
-                                </div>
-                                <div class="brain-question question-3">
-                                    <i class="fas fa-question-circle mr-1"></i> Is it secure?
-                                </div>
-                                <div class="brain-question question-4">
-                                    <i class="fas fa-question-circle mr-1"></i> Can I try it?
-                                </div>
-                            </div>
-                            
-                            <!-- Neural Connections -->
-                            <div class="absolute top-0 left-0 w-full h-full">
-                                <div class="absolute top-1/4 left-0 w-1/4 h-0.5 bg-blue-400 opacity-50"></div>
-                                <div class="absolute top-1/4 right-0 w-1/4 h-0.5 bg-purple-400 opacity-50"></div>
-                                <div class="absolute top-1/2 left-0 w-1/2 h-0.5 bg-pink-400 opacity-50"></div>
-                                <div class="absolute top-3/4 left-1/4 w-1/2 h-0.5 bg-blue-400 opacity-50"></div>
-                                <div class="absolute bottom-1/4 right-0 w-1/4 h-0.5 bg-purple-400 opacity-50"></div>
-                            </div>
-                        </div>
-                        
-                        <h3 class="text-2xl font-bold text-white mb-4 space-grotesk">Neural Network Core</h3>
-                        <p class="text-gray-300 leading-relaxed">
-                            Our advanced neural network processes billions of operations per second, 
-                            learning and adapting in real-time to provide the most accurate AI solutions available.
-                            Watch as it thinks and responds to your questions!
-                        </p>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="team-card glass rounded-xl p-6 text-center">
-                            <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-microchip text-white"></i>
-                            </div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Processing</h4>
-                            <p class="text-gray-400 text-sm">10 TFLOPS</p>
-                        </div>
-                        
-                        <div class="team-card glass rounded-xl p-6 text-center">
-                            <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-memory text-white"></i>
-                            </div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Memory</h4>
-                            <p class="text-gray-400 text-sm">1TB Neural</p>
-                        </div>
-                        
-                        <div class="team-card glass rounded-xl p-6 text-center">
-                            <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-network-wired text-white"></i>
-                            </div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Connections</h4>
-                            <p class="text-gray-400 text-sm">100M Synapses</p>
-                        </div>
-                        
-                        <div class="team-card glass rounded-xl p-6 text-center">
-                            <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-bolt text-white"></i>
-                            </div>
-                            <h4 class="text-lg font-semibold text-white mb-2">Speed</h4>
-                            <p class="text-gray-400 text-sm">0.001ms Latency</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer with Review Box and WhatsApp Button -->
-    <footer class="py-12 bg-gray-900 border-t border-gray-800">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center rotating-logo">
-                            <span class="text-white font-bold text-xl moon-text">MOON</span>
-                        </div>
-                        <span class="text-2xl font-bold text-white space-grotesk holographic-text">UI AI</span>
-                    </div>
-                    <p class="text-gray-400">
-                        Transforming businesses with cutting-edge 2025 AI technology.
-                    </p>
-                </div>
-                
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Quick Actions</h4>
-                    <div class="space-y-3">
-                        <button onclick="scrollToSection('features')" class="w-full px-4 py-3 gradient-bg text-white rounded-lg font-semibold hover:opacity-90 transition-all pulse-button neon-border">
-                            <i class="fas fa-star mr-2"></i> View Features
-                        </button>
-                        <button onclick="scrollToSection('chat')" class="w-full px-4 py-3 glass text-white rounded-lg font-semibold hover:bg-white hover:bg-opacity-20 transition-all neon-border">
-                            <i class="fas fa-comments mr-2"></i> Start Chat
-                        </button>
-                        <button onclick="scrollToSection('team')" class="w-full px-4 py-3 glass text-white rounded-lg font-semibold hover:bg-white hover:bg-opacity-20 transition-all neon-border">
-                            <i class="fas fa-brain mr-2"></i> AI Brain
-                        </button>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="text-white font-semibold mb-4">Connect</h4>
-                    <div class="flex space-x-4">
-                        <a href="https://discord.com/users/abdulrahim.moon" target="_blank" class="w-10 h-10 glass rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-colors">
-                            <i class="fab fa-discord"></i>
-                        </a>
-                        <a href="https://www.reddit.com/user/Moon-UI/" target="_blank" class="w-10 h-10 glass rounded-full flex items-center justify-center text-white hover:bg-orange-600 transition-colors">
-                            <i class="fab fa-reddit"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Review Box -->
-            <div class="mb-8">
-                <div class="review-box glass rounded-2xl p-6 max-w-2xl mx-auto">
-                    <h4 class="text-xl font-bold text-white mb-4 text-center space-grotesk">Share Your Experience</h4>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <input type="text" id="reviewName" placeholder="Your Name" 
-                               class="px-4 py-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-                        <input type="number" id="reviewRating" placeholder="Rating (1-5)" min="1" max="5"
-                               class="px-4 py-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    </div>
-                    <textarea id="reviewText" rows="3" placeholder="Share your experience with our AI..."
-                              class="w-full px-4 py-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 mt-4"></textarea>
-                    <button onclick="submitReview()" class="w-full mt-4 px-6 py-3 gradient-bg text-white rounded-lg font-semibold hover:opacity-90 transition-all cyber-button">
-                        <i class="fas fa-star mr-2"></i> Submit Review
-                    </button>
-                </div>
-            </div>
-            
-            <div class="text-center text-gray-400">
-                <p>&copy; 2024 AI Vision. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/92306955087" target="_blank" class="whatsapp-float">
-        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
-            <i class="fab fa-whatsapp text-white text-2xl"></i>
-        </div>
-    </a>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Close mobile menu when clicking on links
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-        
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-gray-900', 'bg-opacity-95');
-            } else {
-                navbar.classList.remove('bg-gray-900', 'bg-opacity-95');
-            }
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+            const cars = {
+                toyota: {
+                    name: 'Toyota',
+                    models: ['Corolla', 'Camry', 'Prius', 'Hilux'],
+                    icon: 'fa-car',
+                    color: '#dc2626'
+                },
+                honda: {
+                    name: 'Honda',
+                    models: ['Civic', 'Accord', 'CR-V', 'City'],
+                    icon: 'fa-car-side',
+                    color: '#059669'
+                },
+                bmw: {
+                    name: 'BMW',
+                    models: ['3 Series', '5 Series', 'X5', 'X3'],
+                    icon: 'fa-car-burst',
+                    color: '#2563eb'
+                },
+                mercedes: {
+                    name: 'Mercedes',
+                    models: ['C-Class', 'E-Class', 'G-Wagon', 'S-Class'],
+                    icon: 'fa-car-on',
+                    color: '#7c3aed'
+                },
+                audi: {
+                    name: 'Audi',
+                    models: ['A4', 'A6', 'Q7', 'Q5'],
+                    icon: 'fa-car-tunnel',
+                    color: '#ea580c'
+                },
+                suzuki: {
+                    name: 'Suzuki',
+                    models: ['Alto', 'Cultus', 'Swift', 'Mehran'],
+                    icon: 'fa-car',
+                    color: '#0891b2'
                 }
-            });
-        });
-        
-        // Scroll to section function
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
-        
-        // AI Chat Function
-        function sendMessage() {
-            const input = document.getElementById('userInput');
-            const chatBox = document.getElementById('chatBox');
-            const typingIndicator = document.getElementById('typingIndicator');
-            const message = input.value.trim();
-            
-            if (message === '') return;
-            
-            // Add user message
-            const userMessage = document.createElement('div');
-            userMessage.className = 'mb-4 chat-message';
-            userMessage.innerHTML = `
-                <div class="flex justify-end">
-                    <div class="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg px-4 py-2 max-w-md">
-                        <strong class="text-blue-200">You:</strong> ${message}
-                    </div>
-                </div>
-            `;
-            chatBox.appendChild(userMessage);
-            
-            // Clear input
-            input.value = '';
-            
-            // Show typing indicator
-            typingIndicator.classList.remove('hidden');
-            
-            // Simulate AI response
-            setTimeout(() => {
-                typingIndicator.classList.add('hidden');
-                
-                const aiResponses = {
-                    'what is ai': "AI is Artificial Intelligence - computer programs that can think and learn like humans. Example: Our AI can understand your questions and give helpful answers automatically.",
-                    'how does it work': "Our AI works like a human brain - it learns from data and gets smarter over time. Example: When you ask questions, it understands and gives better answers each time.",
-                    'is it secure': "Yes, it's completely secure. We use strong encryption to protect your data. Example: Your messages are locked with special codes that only you can access.",
-                    'can i try it': "Yes, you can try it right now! Example: Type any question in the chat box above and I'll answer immediately.",
-                    'example': "Here's an example: If you ask 'What is automation?', I'll explain how our AI can do tasks automatically for you.",
-                    'automation': "Automation means AI does work for you automatically. Example: Our AI can answer customer questions 24/7 without human help.",
-                    'learning': "Machine learning is when AI gets smarter by itself. Example: Our AI learns from every conversation to give better answers next time.",
-                    'security': "Security means keeping your data safe. Example: We use quantum encryption that's impossible to break, like a super-strong lock.",
-                    'pricing': "Our prices are: $99/month for basic, $299/month for professional, and custom for enterprise. Example: Basic plan includes all AI features for small businesses.",
-                    'features': "Our features include: Chat AI, Automation, Security, and Learning. Example: You can use our AI to talk to customers automatically.",
-                    'contact': "You can contact us at +92306955087 on WhatsApp. Example: Message us anytime and we'll respond within minutes.",
-                    'help': "I can help you with information about AI, automation, security, pricing, and features. Example: Just ask 'tell me about automation'.",
-                    'default': [
-                        "I'm MOON UI AI - here to help you! Example: Ask me 'What can you do?' and I'll explain my capabilities.",
-                        "I can answer questions about AI, automation, security, and pricing. Example: Type 'How much does it cost?' for pricing info.",
-                        "I'm designed to help you understand AI better. Example: Ask 'What is machine learning?' for a simple explanation.",
-                        "I work like a smart assistant for your business. Example: Try asking 'How can AI help my business?'",
-                        "I'm here to provide clear answers about our AI services. Example: Ask 'Is your AI easy to use?'"
-                    ]
-                };
-                
-                let response;
-                const lowerMessage = message.toLowerCase();
-                
-                // Check for exact matches first
-                if (lowerMessage.includes('what is ai') || lowerMessage.includes('define ai')) {
-                    response = aiResponses['what is ai'];
-                } else if (lowerMessage.includes('how does it work') || lowerMessage.includes('how work')) {
-                    response = aiResponses['how does it work'];
-                } else if (lowerMessage.includes('is it secure') || lowerMessage.includes('security')) {
-                    response = aiResponses['is it secure'];
-                } else if (lowerMessage.includes('can i try') || lowerMessage.includes('try it')) {
-                    response = aiResponses['can i try it'];
-                } else if (lowerMessage.includes('example')) {
-                    response = aiResponses['example'];
-                } else if (lowerMessage.includes('automation')) {
-                    response = aiResponses.automation;
-                } else if (lowerMessage.includes('learning') || lowerMessage.includes('machine learning')) {
-                    response = aiResponses.learning;
-                } else if (lowerMessage.includes('security') || lowerMessage.includes('safe')) {
-                    response = aiResponses.security;
-                } else if (lowerMessage.includes('pricing') || lowerMessage.includes('cost') || lowerMessage.includes('price') || lowerMessage.includes('how much')) {
-                    response = aiResponses.pricing;
-                } else if (lowerMessage.includes('features') || lowerMessage.includes('what can you do')) {
-                    response = aiResponses.features;
-                } else if (lowerMessage.includes('contact') || lowerMessage.includes('reach') || lowerMessage.includes('whatsapp')) {
-                    response = aiResponses.contact;
-                } else if (lowerMessage.includes('help') || lowerMessage.includes('assist')) {
-                    response = aiResponses.help;
-                } else {
-                    const defaultResponses = aiResponses.default;
-                    response = defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
-                }
-                
-                const aiMessage = document.createElement('div');
-                aiMessage.className = 'mb-4 chat-message';
-                aiMessage.innerHTML = `
-                    <div class="flex justify-start">
-                        <div class="glass text-white rounded-lg px-4 py-2 max-w-md">
-                            <i class="fas fa-robot text-blue-400 mr-2"></i>
-                            <strong class="text-purple-400">AI:</strong> ${response}
-                        </div>
-                    </div>
-                `;
-                chatBox.appendChild(aiMessage);
-                
-                // Scroll to bottom
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, 1500);
-        }
-        
-        // Quick Question Function
-        function quickQuestion(topic) {
-            const input = document.getElementById('userInput');
-            const questions = {
-                'automation': 'What is AI automation and how does it work?',
-                'learning': 'How does your machine learning work?',
-                'security': 'Is your AI secure and how do you protect data?',
-                'pricing': 'What are your pricing plans and features?'
             };
-            
-            input.value = questions[topic];
-            sendMessage();
+
+            const parts = [
+                { name: 'Engine', price: 75000, icon: 'fa-cogs', description: 'Complete engine assembly', color: '#dc2626' },
+                { name: 'Transmission', price: 55000, icon: 'fa-gear', description: 'Automatic/Manual transmission', color: '#2563eb' },
+                { name: 'Brakes', price: 12000, icon: 'fa-circle-stop', description: 'Brake pads, discs, calipers', color: '#059669' },
+                { name: 'Suspension', price: 25000, icon: 'fa-compress', description: 'Shock absorbers, springs', color: '#7c3aed' },
+                { name: 'Electrical', price: 18000, icon: 'fa-bolt', description: 'Wiring, sensors, lights', color: '#eab308' },
+                { name: 'Body Parts', price: 35000, icon: 'fa-panels', description: 'Doors, fenders, bumpers', color: '#ea580c' },
+                { name: 'Battery', price: 8500, icon: 'fa-battery-full', description: 'Car battery and accessories', color: '#0891b2' },
+                { name: 'Tires', price: 15000, icon: 'fa-circle', description: 'All season tires', color: '#64748b' },
+                { name: 'Engine Oil', price: 3500, icon: 'fa-oil-can', description: 'Premium synthetic engine oil', color: '#84cc16' }
+            ];
+
+            const filteredParts = parts.filter(part =>
+                part.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            const togglePart = (partName) => {
+                setAnimatingParts(new Set([partName]));
+                setTimeout(() => setAnimatingParts(new Set()), 600);
+                
+                setSelectedParts(prev => 
+                    prev.includes(partName) 
+                        ? prev.filter(p => p !== partName)
+                        : [...prev, partName]
+                );
+            };
+
+            const getTotalPrice = () => {
+                return selectedParts.reduce((total, partName) => {
+                    const part = parts.find(p => p.name === partName);
+                    return total + (part ? part.price : 0);
+                }, 0);
+            };
+
+            const selectedCarData = selectedCar ? cars[selectedCar] : null;
+
+            return (
+                <div className={`min-h-screen bg-gradient-to-br from-purple-600 via-blue-600 to-pink-500 transition-all duration-1000 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
+                    {/* Header */}
+                    <header className={`glass-card sticky top-0 z-50 mx-4 mt-4 p-4 transition-all duration-700 ${mounted ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
+                        <div className="max-w-7xl mx-auto flex justify-between items-center">
+                            <div className="flex items-center gap-3">
+                                <i className="fas fa-car text-3xl text-white animate-pulse"></i>
+                                <h1 className="text-2xl font-bold text-white bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">Car Sphere Parts</h1>
+                            </div>
+                            <button 
+                                onClick={() => setShowDashboard(!showDashboard)}
+                                className="glass-button px-6 py-2 rounded-lg text-white flex items-center gap-2 hover:scale-105 transition-transform duration-300"
+                            >
+                                <i className="fas fa-chart-line"></i>
+                                Dashboard
+                            </button>
+                        </div>
+                    </header>
+
+                    {!showDashboard ? (
+                        <div className="max-w-7xl mx-auto p-4">
+                            {/* Car Selection */}
+                            <div className={`mb-12 transition-all duration-1000 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                                <h2 className="text-3xl font-bold text-white text-center mb-8 animate-pulse">
+                                    Select Your Car Brand
+                                </h2>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                                    {Object.entries(cars).map(([key, car]) => (
+                                        <button
+                                            key={key}
+                                            onClick={() => setSelectedCar(key)}
+                                            onMouseEnter={() => setHoveredCar(key)}
+                                            onMouseLeave={() => setHoveredCar('')}
+                                            className={`car-card p-8 text-center transition-all duration-500 ${
+                                                selectedCar === key ? 'ring-4 ring-white ring-opacity-30 scale-105' : ''
+                                            } ${
+                                                hoveredCar === key ? 'scale-110 shadow-2xl' : ''
+                                            } ${
+                                                mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                                            }`}
+                                            style={{
+                                                borderColor: selectedCar === key ? car.color : 'rgba(255, 255, 255, 0.2)',
+                                                borderWidth: selectedCar === key ? '3px' : '1px',
+                                                transitionDelay: `${Object.keys(cars).indexOf(key) * 100}ms`
+                                            }}
+                                        >
+                                            <i 
+                                                className={`fas ${car.icon} text-4xl mb-3 transition-transform duration-300 ${
+                                                    hoveredCar === key ? 'scale-125 rotate-12' : ''
+                                                }`}
+                                                style={{ color: car.color }}
+                                            ></i>
+                                            <h3 className="text-white font-semibold">{car.name}</h3>
+                                            <div className="flex flex-wrap gap-1 mt-2 justify-center">
+                                                {car.models.slice(0, 2).map(model => (
+                                                    <span key={model} className="text-xs text-gray-300">
+                                                        {model}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            {hoveredCar === key && (
+                                                <div className="absolute inset-0 rounded-24 bg-gradient-to-t from-white/10 to-transparent pointer-events-none"></div>
+                                            )}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Parts Selection */}
+                            {selectedCar && (
+                                <div className={`transition-all duration-700 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+                                    <div className="glass-card p-6 mb-8">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <i 
+                                                className={`fas ${selectedCarData.icon} text-2xl`}
+                                                style={{ color: selectedCarData.color }}
+                                            ></i>
+                                            <h2 className="text-2xl font-bold text-white">
+                                                {selectedCarData.name} Parts Selection
+                                            </h2>
+                                        </div>
+
+                                        {/* Search Bar */}
+                                        <div className="max-w-md mx-auto mb-8">
+                                            <div className="relative">
+                                                <input
+                                                    type="text"
+                                                    placeholder="Search parts..."
+                                                    value={searchTerm}
+                                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                                    className="w-full px-4 py-3 pr-10 rounded-lg bg-white bg-opacity-20 backdrop-blur-md text-white placeholder-gray-300 border border-white border-opacity-30 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                                                />
+                                                <i className="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-white"></i>
+                                            </div>
+                                        </div>
+
+                                        {/* Parts Grid */}
+                                        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                            {filteredParts.map((part) => (
+                                                <button
+                                                    key={part.name}
+                                                    onClick={() => togglePart(part.name)}
+                                                    onMouseEnter={() => setHoveredPart(part.name)}
+                                                    onMouseLeave={() => setHoveredPart('')}
+                                                    className={`part-item p-6 rounded-2xl text-left transition-all duration-500 shimmer relative overflow-hidden ${
+                                                        selectedParts.includes(part.name) ? 'selected' : ''
+                                                    } ${
+                                                        hoveredPart === part.name ? 'scale-105 shadow-2xl' : ''
+                                                    } ${
+                                                        animatingParts.has(part.name) ? 'animate-bounce' : ''
+                                                    }`}
+                                                    style={{
+                                                        transitionDelay: `${filteredParts.indexOf(part) * 50}ms`
+                                                    }}
+                                                >
+                                                    <div className="flex items-start gap-3">
+                                                        <div 
+                                                            className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                                                                hoveredPart === part.name ? 'scale-125 rotate-12' : ''
+                                                            }`}
+                                                            style={{ background: `linear-gradient(135deg, ${part.color}20, ${part.color}40)` }}
+                                                        >
+                                                            <i 
+                                                                className={`${part.icon} text-xl transition-transform duration-300 ${
+                                                                    hoveredPart === part.name ? 'scale-125' : ''
+                                                                }`}
+                                                                style={{ color: part.color }}
+                                                            ></i>
+                                                        </div>
+                                                        <div className="flex-1">
+                                                            <h4 className={`text-white font-semibold text-lg transition-all duration-300 ${
+                                                                hoveredPart === part.name ? 'text-xl' : ''
+                                                            }`}>{part.name}</h4>
+                                                            <p className="text-gray-300 text-sm mb-2">{part.description}</p>
+                                                            <div className="flex items-center gap-2">
+                                                                <p className={`text-green-400 font-bold transition-all duration-300 ${
+                                                                    hoveredPart === part.name ? 'text-xl' : 'text-lg'
+                                                                }`}>Rs.{part.price.toLocaleString()}</p>
+                                                                {part.name === 'Engine Oil' && (
+                                                                    <span className="bg-yellow-500 text-yellow-900 text-xs px-2 py-1 rounded-full font-semibold animate-pulse">
+                                                                        BEST SELLER
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                        {selectedParts.includes(part.name) && (
+                                                            <div className="flex flex-col items-center animate-pulse">
+                                                                <i className="fas fa-check-circle text-green-400 text-xl mb-1"></i>
+                                                                <span className="text-green-400 text-xs font-semibold">SELECTED</span>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    {hoveredPart === part.name && (
+                                                        <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-white/5 to-transparent pointer-events-none"></div>
+                                                    )}
+                                                </button>
+                                            ))}
+                                        </div>
+
+                                        {/* Selected Parts Summary */}
+                                        {selectedParts.length > 0 && (
+                                            <div className="mt-8 p-4 bg-white bg-opacity-10 rounded-lg">
+                                                <div className="flex justify-between items-center">
+                                                    <div>
+                                                        <p className="text-white font-semibold">
+                                                            {selectedParts.length} parts selected
+                                                        </p>
+                                                        <p className="text-gray-300 text-sm">
+                                                            {selectedParts.join(', ')}
+                                                        </p>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <p className="text-2xl font-bold text-green-400">
+                                                            Rs.{getTotalPrice().toLocaleString()}
+                                                        </p>
+                                                        <p className="text-gray-300 text-sm">Total Price</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        /* Personal Dashboard */
+                        <div className="max-w-6xl mx-auto p-4 slide-in">
+                            <div className="glass-card p-8">
+                                <div className="flex justify-between items-center mb-8">
+                                    <h2 className="text-3xl font-bold text-white">Personal Dashboard</h2>
+                                    <button 
+                                        onClick={() => setShowDashboard(false)}
+                                        className="text-white hover:text-red-400 transition text-2xl"
+                                    >
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                </div>
+
+                                {/* Stats Grid */}
+                                <div className="stats-grid mb-8">
+                                    <div className="stat-card">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <i className="fas fa-car text-2xl text-blue-400"></i>
+                                            <span className="text-2xl font-bold text-white">
+                                                {selectedCar ? selectedCarData.name : 'Not Selected'}
+                                            </span>
+                                        </div>
+                                        <p className="text-gray-300">Selected Car</p>
+                                    </div>
+
+                                    <div className="stat-card">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <i className="fas fa-cogs text-2xl text-green-400"></i>
+                                            <span className="text-2xl font-bold text-white">{selectedParts.length}</span>
+                                        </div>
+                                        <p className="text-gray-300">Selected Parts</p>
+                                    </div>
+
+                                    <div className="stat-card">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <i className="fas fa-money-bill-wave text-2xl text-yellow-400"></i>
+                                            <span className="text-2xl font-bold text-white">
+                                                Rs.{getTotalPrice().toLocaleString()}
+                                            </span>
+                                        </div>
+                                        <p className="text-gray-300">Total Price</p>
+                                    </div>
+
+                                    <div className="stat-card">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <i className="fas fa-percentage text-2xl text-purple-400"></i>
+                                            <span className="text-2xl font-bold text-white">15%</span>
+                                        </div>
+                                        <p className="text-gray-300">Discount Available</p>
+                                    </div>
+                                </div>
+
+                                {/* Selected Parts Details */}
+                                {selectedParts.length > 0 && (
+                                    <div className="glass-card p-6">
+                                        <h3 className="text-xl font-bold text-white mb-4">Selected Parts Details</h3>
+                                        <div className="space-y-3">
+                                            {selectedParts.map(partName => {
+                                                const part = parts.find(p => p.name === partName);
+                                                return (
+                                                    <div key={partName} className="flex justify-between items-center p-3 bg-white bg-opacity-10 rounded-lg">
+                                                        <div className="flex items-center gap-3">
+                                                            <i className={`${part.icon} text-white`}></i>
+                                                            <span className="text-white">{part.name}</span>
+                                                        </div>
+                                                        <span className="text-green-400 font-bold">
+                                                            Rs.{part.price.toLocaleString()}
+                                                        </span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+
+                                        <div className="mt-6 pt-6 border-t border-white border-opacity-20">
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-xl font-bold text-white">Total Amount:</span>
+                                                <span className="text-2xl font-bold text-green-400">
+                                                    Rs.{getTotalPrice().toLocaleString()}
+                                                </span>
+                                            </div>
+                                            <button className="w-full mt-4 glass-button py-3 rounded-lg text-white font-semibold hover:bg-green-500 hover:bg-opacity-30 transition">
+                                                <i className="fas fa-shopping-cart mr-2"></i>
+                                                Proceed to Checkout
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {selectedParts.length === 0 && (
+                                    <div className="text-center py-12">
+                                        <i className="fas fa-box-open text-6xl text-gray-400 mb-4"></i>
+                                        <p className="text-gray-300 text-lg">No parts selected yet</p>
+                                        <button 
+                                            onClick={() => setShowDashboard(false)}
+                                            className="mt-4 glass-button px-6 py-2 rounded-lg text-white"
+                                        >
+                                            Select Parts
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
         }
-        
-        // Enter key to send message
-        document.getElementById('userInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-        
-        // Submit Review Function
-        function submitReview() {
-            const name = document.getElementById('reviewName').value;
-            const rating = document.getElementById('reviewRating').value;
-            const text = document.getElementById('reviewText').value;
-            
-            if (!name || !rating || !text) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            if (rating < 1 || rating > 5) {
-                alert('Rating must be between 1 and 5');
-                return;
-            }
-            
-            // Create review message for WhatsApp
-            const reviewMessage = `🌟 New Review Received! 🌟\n\nName: ${name}\nRating: ${rating}/5 stars\nComment: ${text}\n\nThank you for your feedback!`;
-            
-            // Open WhatsApp with review message
-            window.open(`https://wa.me/92306955087?text=${encodeURIComponent(reviewMessage)}`, '_blank');
-            
-            // Clear form
-            document.getElementById('reviewName').value = '';
-            document.getElementById('reviewRating').value = '';
-            document.getElementById('reviewText').value = '';
-            
-            // Show success message
-            const successDiv = document.createElement('div');
-            successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
-            successDiv.innerHTML = '<i class="fas fa-check mr-2"></i> Review submitted successfully!';
-            document.body.appendChild(successDiv);
-            
-            setTimeout(() => {
-                successDiv.remove();
-            }, 3000);
-        }
-        
-        // Add intersection observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('slide-in');
-                }
-            });
-        }, observerOptions);
-        
-        // Observe all feature cards and sections
-        document.querySelectorAll('.feature-card, .team-card').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Add typing effect to hero title
-        window.addEventListener('load', () => {
-            const heroTitle = document.querySelector('.hero-title .gradient-text');
-            if (heroTitle) {
-                heroTitle.classList.add('typing-effect');
-            }
-        });
+
+        ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
 </html>
