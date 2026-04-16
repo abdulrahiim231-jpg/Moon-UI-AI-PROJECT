@@ -20,8 +20,8 @@
                 AR-AUTO-STORE
             </div>
             
-            <!-- Center - Navigation Links -->
-            <div class="flex space-x-8">
+            <!-- Center - Desktop Navigation Links -->
+            <div class="hidden md:flex space-x-8 flex-1 justify-center">
                 <a href="index.html" class="text-white hover:text-blue-400 transition-all duration-300 font-semibold hover:scale-110 relative group no-underline transform hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/50">
                     HOME
                     <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
@@ -36,15 +36,38 @@
                 </a>
             </div>
             
-            <!-- Right Side - Search Bar -->
-            <div class="relative">
-                <input type="text" placeholder="Search..." class="bg-gray-700 bg-opacity-50 backdrop-blur-md text-white px-4 py-2 rounded-full pr-10 border border-gray-600 focus:border-blue-400 focus:outline-none transition-all duration-300 placeholder-gray-400">
-                <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-400 hover:text-blue-300 transition-colors">
-                    <i class="fas fa-search"></i>
+            <!-- Right Side - Search & Mobile Menu -->
+            <div class="flex items-center space-x-4">
+                <!-- Mobile menu button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-white hover:text-blue-400 transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
+                
+                <!-- Search Bar -->
+                <div class="relative">
+                    <input type="text" placeholder="Search..." class="bg-gray-700 bg-opacity-50 backdrop-blur-md text-white px-4 py-2 rounded-full pr-10 border border-gray-600 focus:border-blue-400 focus:outline-none transition-all duration-300 placeholder-gray-400">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-400 hover:text-blue-300 transition-colors">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-95 backdrop-blur-lg z-50">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <button onclick="toggleMobileMenu()" class="absolute top-4 right-4 text-white hover:text-blue-400 transition-colors">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <a href="index.html" onclick="toggleMobileMenu()" class="text-white hover:text-blue-400 transition-all duration-300 font-semibold text-2xl block py-4">HOME</a>
+            <a href="about.html" onclick="toggleMobileMenu()" class="text-blue-400 transition-all duration-300 font-semibold text-2xl block py-4">ABOUT</a>
+            <a href="product.html" onclick="toggleMobileMenu()" class="text-white hover:text-blue-400 transition-all duration-300 font-semibold text-2xl block py-4">PRODUCTS</a>
+        </div>
+    </div>
+    
+    <!-- Add script.js for mobile menu functionality -->
+    <script src="script.js"></script>
     
     <!-- Main Content Area -->
     <main class="relative z-10 pt-8 pb-16">
